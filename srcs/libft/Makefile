@@ -6,7 +6,7 @@
 #    By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 17:15:16 by fgaribot          #+#    #+#              #
-#    Updated: 2019/11/05 17:35:20 by fgaribot         ###   ########.fr        #
+#    Updated: 2020/01/15 13:33:14 by cde-moul         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ CFLAGS = -Wall -Werror -Wextra -I ./includes
 AR = ar rc
 SRC = ./
 FILES = $(SRC)ft_abs.c\
+		$(SRC)ft_countnchar.c\
 		$(SRC)ft_memset.c\
 		$(SRC)ft_bzero.c\
 		$(SRC)ft_memcpy.c\

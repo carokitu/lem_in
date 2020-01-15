@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 09:08:26 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/11/05 16:42:01 by fgaribot         ###   ########.fr       */
+/*   Updated: 2020/01/15 18:30:49 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		ft_isanint(char *str)
 	while (str[i] == 48)
 		i++;
 	x = i - 1;
-	while (str[++x])
+	while (str[++x] && str[x] != '\n')
 	{
 		if ((str[x] < 48 || str[x] > 57) || (x - i > 10))
 			return (0);

@@ -6,7 +6,7 @@
 /*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:36:07 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/14 17:25:38 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/15 18:33:06 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,16 @@ static void		lm_nb_ants(t_data *data, char **line)
 			}
 			else
 			{
-				ft_printf("ERROR\n");
+				ft_printf("ERROR_1\n");
 				free(line);
 				free(data);
 				exit(EXIT_FAILURE);
 			}
+		}
 	}
 	if (data->ants <= 0)
 	{
-		ft_printf("ERROR\n");
+		ft_printf("ERROR_2\n");
 		free(line);
 		free(data);
 		exit(EXIT_FAILURE);
@@ -50,11 +51,12 @@ static void		lm_checkorders(t_data *data, char **line)
 	{
 		free(line);
 		if (data->start)
-			free(data->start;
+			free(data->start);
 		if(data->end)
 			free(data->end);
 		free(data);
 		//FREE HASHTABLE ?
+		ft_printf("ERROR_4");
 		exit(EXIT_FAILURE);
 	}
 }
@@ -68,30 +70,32 @@ static void		lm_room(t_data *data, char **line)
 			if (*line[0] == '#' && *line[1] == '#')
 				lm_checkorders(data, line);
 			else
-				lm_get_room(data, line);
+				if (lm_get_room(data, line) == -1)
+					return;
 		}
 	}
 }
 
 static void		lm_parsing(t_data *data)
 {
-	char	**line;
+	char	*line;
 
-	if (!(line = (char **)ft_memalloc(sizeof(char *))))
-	{
-		free(data);
-		exit(EXIT_FAILURE);
-	}
-	lm_nb_ants(data, line);
+	line = NULL;
+	lm_nb_ants(data, &line);
+	lm_room(data, &line);
+	lm_pipe(data, &line);
+	ft_printf("end parsing\n");
 }
 
 int			main(int argc, char **argv)
 {
 	t_data	*data;
 
-	if (argc != 2)
+	//pas sure du argv = NULL
+	argv = NULL;
+	if (argc != 1)
 	{
-		ft_printf("ERROR\n");
+		ft_printf("ERROR_3\n");
 		return (1);
 	}
 	if (!(data = (t_data *)ft_memalloc(sizeof(t_data))))
