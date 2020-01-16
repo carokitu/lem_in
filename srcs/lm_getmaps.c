@@ -6,7 +6,7 @@
 /*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 16:06:53 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/15 18:36:02 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/16 17:15:53 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,15 @@ char	**lm_check_room(t_data *data, char **line)
 				}
 			}
 		}
+		else
+		{
+			//free tout
+			ft_printf("ERROR\n");
+			exit(EXIT_FAILURE);
+		}
 		return (room);
 	}
-	free(room); // toutes passer par les differents;
+//	free(room); // toutes passer par les differents;
 	return (NULL);
 }
 
@@ -80,16 +86,14 @@ int		lm_get_room(t_data *data, char **line)
 		//FREE hashtable / line / data
 		exit(EXIT_FAILURE);
 	current_room = data->hashtable[hash];
-	if (current_room == NULL)
-		current_room = new_room;
-	else
-	{
-		new_room->next = current_room;
-		data->hashtable[hash] = new_room;
-	}
 	new_room->name = ft_strdup(room[0]);
 	new_room->coord_x = ft_atoi(room[1]);
 	new_room->coord_y = ft_atoi(room[2]);
+	if (current_room == NULL)
+		current_room = new_room;
+	else
+		new_room->next = current_room;
+	data->hashtable[hash] = new_room;
 	//free(room);
 	return (1);
 }
@@ -101,52 +105,69 @@ void	lm_getstart(t_data *data, char **line)
 	t_room	*current_room;
 	int		hash;
 
+	if (get_next_line(0, line) != 1)
+	{
+		//free
+		ft_printf("ERROR\n");
+		exit(EXIT_FAILURE);
+	}
 	room = lm_check_room(data, line);
+	if (room == NULL)
+	{
+		//free tout
+		ft_printf("ERROR\n");
+		exit(EXIT_FAILURE);
+	}
 	hash = hachage(room[0], ft_strlen(room[0]));
 	if (data->start != NULL || !(new_room = (t_room *)ft_memalloc(sizeof(t_room))))
 		//FREE hashtable / line / data
 		exit(EXIT_FAILURE);
+	new_room->name = ft_strdup(room[0]);
+	new_room->coord_x = ft_atoi(room[1]);
+	new_room->coord_y = ft_atoi(room[2]);
 	current_room = data->hashtable[hash];
 	if (current_room == NULL)
 		current_room = new_room;
 	else
-	{
 		new_room->next = current_room;
-		data->hashtable[hash] = new_room;
-	}
-	new_room->name = ft_strdup(room[0]);
-	new_room->coord_x = ft_atoi(room[1]);
-	new_room->coord_y = ft_atoi(room[2]);
+	data->hashtable[hash] = new_room;
 	data->start = new_room;
 	//free(room);
 }
 
-void    lm_getend(t_data *data, char **line)
+void	lm_getend(t_data *data, char **line)
 {
 	char	**room;
 	t_room	*new_room;
 	t_room	*current_room;
 	int		hash;
 
+	if (get_next_line(0, line) != 1)
+	{
+		//free
+		ft_printf("ERROR\n");
+		exit(EXIT_FAILURE);
+	}
 	room = lm_check_room(data, line);
+	if (room == NULL)
+	{
+		//free tout
+		ft_printf("ERROR\n");
+		exit(EXIT_FAILURE);
+	}
 	hash = hachage(room[0], ft_strlen(room[0]));
 	if (data->end != NULL || !(new_room = (t_room *)ft_memalloc(sizeof(t_room))))
 		//FREE hashtable / line / data
-	{
-		ft_printf("ERROR_7\n");
 		exit(EXIT_FAILURE);
-	}
+	new_room->name = ft_strdup(room[0]);
+	new_room->coord_x = ft_atoi(room[1]);
+	new_room->coord_y = ft_atoi(room[2]);
 	current_room = data->hashtable[hash];
 	if (current_room == NULL)
 		current_room = new_room;
 	else
-	{
 		new_room->next = current_room;
-		data->hashtable[hash] = new_room;
-	}
-	new_room->name = ft_strdup(room[0]);
-	new_room->coord_x = ft_atoi(room[1]);
-	new_room->coord_y = ft_atoi(room[2]);
+	data->hashtable[hash] = new_room;
 	data->end = new_room;
 	//free(room);
 }

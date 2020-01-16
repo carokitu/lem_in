@@ -6,7 +6,7 @@
 /*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:15:14 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/15 18:25:09 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/16 16:33:08 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int		lm_get_room(t_data *data, char **line);
 ** LM_BFS_S
 */
 
-int		lm_add_links(t_path *current_path, t_path *last, t_data *data);
+int		lm_add_links(t_path **current_path, t_path **last, t_data *data);
 void	lm_bfs_test(t_data *data);
 
 /*
@@ -86,6 +86,13 @@ void	lm_bfs_test(t_data *data);
 void	lm_pipe(t_data *data, char **line);
 int		lm_get_pipe(t_data *data, char **line);
 int		lm_link_room(t_room *room_0, t_room *room_1);
+
+/*
+**	LM_PRINT_ROOM_C
+*/
+
+void	lm_print_rooms(t_data *data);
+void	lm_print_path(t_path *path);
 
 #endif
 

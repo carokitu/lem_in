@@ -6,7 +6,7 @@
 #    By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/18 13:45:49 by cde-moul          #+#    #+#              #
-#    Updated: 2020/01/15 18:18:42 by cde-moul         ###   ########.fr        #
+#    Updated: 2020/01/16 10:45:49 by cde-moul         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ INCLUDES		=	./includes/lem_in.h
 SRCS			=	main.c \
 					lm_getmaps.c \
 					lm_getpipes.c \
-					lm_bfs.c
+					lm_bfs.c \
+					lm_print_room.c
 
 OBJS			=	$(addprefix $(OBJSDIR)/, $(SRCS:.c=.o))
 

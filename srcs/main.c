@@ -6,7 +6,7 @@
 /*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:36:07 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/15 18:33:06 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/16 17:18:19 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ static void		lm_nb_ants(t_data *data, char **line)
 
 static void		lm_checkorders(t_data *data, char **line)
 {
-	if (ft_strcmp(*line, "##start") == 0)
+	if (ft_strcmp(*line, "##start\n") == 0)
 		lm_getstart(data, line);
-	else if (ft_strcmp(*line, "##end") == 0)
+	else if (ft_strcmp(*line, "##end\n") == 0)
 		lm_getend(data, line);
 	else
 	{
@@ -65,14 +65,13 @@ static void		lm_room(t_data *data, char **line)
 {
 	while (get_next_line(0, line) == 1)
 	{
-		if (!(*line[0] == '#' && (!(*line[1]) || (!(*line[1] != '#' )))))
+		if (!(*line[0] == '#'))
 		{
-			if (*line[0] == '#' && *line[1] == '#')
-				lm_checkorders(data, line);
-			else
-				if (lm_get_room(data, line) == -1)
-					return;
+			if (lm_get_room(data, line) == -1)
+				return;
 		}
+		if ((*line)[0] == '#' && (*line)[1] && (*line)[1] == '#')
+			lm_checkorders(data, line);
 	}
 }
 
@@ -84,7 +83,6 @@ static void		lm_parsing(t_data *data)
 	lm_nb_ants(data, &line);
 	lm_room(data, &line);
 	lm_pipe(data, &line);
-	ft_printf("end parsing\n");
 }
 
 int			main(int argc, char **argv)

@@ -6,7 +6,7 @@
 /*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 13:20:16 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/15 18:37:46 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/16 17:39:23 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,39 +49,49 @@ int		lm_get_pipe(t_data *data, char **line)
 {
 	int		i;
 	char	**room_to_link;
+	char	*correct_line;
 	t_room	*room_0;
 	t_room	*room_1;
 
 	i = ft_countnchar(*line, '-');
 	if (i == 1)
 	{
-		room_to_link = ft_strsplit(*line, '-');
-		room_0 = lm_room_exist(room_to_link[0], data);
-		room_1 = lm_room_exist(room_to_link[1], data);
-		if (room_0 && room_1)
+		correct_line = ft_strsub(*line, 0, ft_strlen(*line) - 1);  // rendre portable en agisant sur la presence ou pas du \n
+		room_to_link = ft_strsplit(correct_line, '-');
+		if (room_to_link[0] && room_to_link[1])
 		{
-			if (lm_link_room(room_0, room_1) == -1 || lm_link_room(room_1, room_0) == -1)
+			room_0 = lm_room_exist(room_to_link[0], data);
+			room_1 = lm_room_exist(room_to_link[1], data);
+			if (room_0 && room_1)
 			{
-				ft_printf("ERROR_9\n");
-				//free room_to_link, data, line, ft_printf("malloc error");
-				exit(EXIT_FAILURE);
+				if (lm_link_room(room_0, room_1) == -1 || lm_link_room(room_1, room_0) == -1)
+				{
+					ft_printf("ERROR_9\n");
+					//free room_to_link, data, line, ft_printf("malloc error");
+					exit(EXIT_FAILURE);
+				}
 			}
 		}
 		else
 		{
+			ft_printf("BIS_ERROR_10\n");
 			//, free room_to_link
 			return (-1);
 		}
 	}
 	else
-	{
-		ft_printf("Usage : Veuillez entrer des tunels valides\n");
-	}
+		return(-1);
 	return (0);
 }
 
 void	lm_pipe(t_data *data, char **line)
 {
+	if (*line == NULL)
+	{
+		//free
+		ft_printf("ERROR\n");
+		exit(EXIT_FAILURE);
+	}
 	if (!(*line[0] == '#'))
 	{
 		if (lm_get_pipe(data, line) == -1)
@@ -98,5 +108,6 @@ void	lm_pipe(t_data *data, char **line)
 				break;
 	}
 	free(*line);
+	lm_print_rooms(data);
 	lm_bfs_test(data);
 }
