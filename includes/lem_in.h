@@ -6,7 +6,7 @@
 /*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:15:14 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/16 16:33:08 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/20 17:53:32 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@
 ** STRUCTURES
 */
 
-typedef struct s_links
+typedef struct 		s_links
 {
-	char		*name;
-	int			hash;
+	char			*name;
+	int				hash;
 	struct s_room	*room;
-	struct s_links		*next;
-}				t_links;
+	struct s_links	*next;
+	int				flux;
+}					t_links;
 
 typedef struct s_room
 {
@@ -38,23 +39,27 @@ typedef struct s_room
 	int			pass;
 }				t_room;
 
-typedef struct	s_data
-{
-	struct s_room		*hashtable[8111];
-	int			ants;
-	int			order;
-	struct s_room		*start;
-	struct s_room		*end;
-	int			pass;
-	// LINE
-}				t_data;
-
 typedef struct	s_path
 {
 	struct s_room		*room;
 	struct s_path		*previous;
 	struct s_path		*next;
 }				t_path;
+
+typedef struct	s_data
+{
+	struct s_room		*hashtable[8111];
+	int			ants;
+	int			order;
+	struct	s_room		*start;
+	struct	s_room		*end;
+	struct	s_path		*last;
+	struct	s_path		*best;
+	int			pass;
+	
+	// LINE
+}				t_data;
+
 
 typedef struct	s_best
 {
@@ -86,6 +91,13 @@ void	lm_bfs_test(t_data *data);
 void	lm_pipe(t_data *data, char **line);
 int		lm_get_pipe(t_data *data, char **line);
 int		lm_link_room(t_room *room_0, t_room *room_1);
+
+/*
+**	LM_FREE_C
+*/
+
+void	lm_free_exit(t_data *data, char **line);
+void	lm_free_str(char **str);
 
 /*
 **	LM_PRINT_ROOM_C

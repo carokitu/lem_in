@@ -6,7 +6,7 @@
 /*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:36:07 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/16 17:18:19 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/20 16:37:18 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,8 @@ static void		lm_nb_ants(t_data *data, char **line)
 				break ;
 			}
 			else
-			{
-				ft_printf("ERROR_1\n");
-				free(line);
-				free(data);
-				exit(EXIT_FAILURE);
-			}
+				lm_free_exit(data, line);
+			free(*line);
 		}
 	}
 	if (data->ants <= 0)
@@ -39,6 +35,7 @@ static void		lm_nb_ants(t_data *data, char **line)
 		free(data);
 		exit(EXIT_FAILURE);
 	}
+	free(*line);
 }
 
 static void		lm_checkorders(t_data *data, char **line)
@@ -49,7 +46,7 @@ static void		lm_checkorders(t_data *data, char **line)
 		lm_getend(data, line);
 	else
 	{
-		free(line);
+/*		free(line);
 		if (data->start)
 			free(data->start);
 		if(data->end)
@@ -57,7 +54,9 @@ static void		lm_checkorders(t_data *data, char **line)
 		free(data);
 		//FREE HASHTABLE ?
 		ft_printf("ERROR_4");
-		exit(EXIT_FAILURE);
+		exit(EXIT_FAILURE);*/
+	// toute commande inconnue sera ignoree
+		return ;
 	}
 }
 
@@ -68,6 +67,7 @@ static void		lm_room(t_data *data, char **line)
 		if (!(*line[0] == '#'))
 		{
 			if (lm_get_room(data, line) == -1)
+			//	lm_free_exit(data, line);
 				return;
 		}
 		if ((*line)[0] == '#' && (*line)[1] && (*line)[1] == '#')
@@ -83,6 +83,10 @@ static void		lm_parsing(t_data *data)
 	lm_nb_ants(data, &line);
 	lm_room(data, &line);
 	lm_pipe(data, &line);
+	ft_printf("*---------------------------*\n");
+	while ("pas de chemin possible")
+		lm_bfs_test(data);
+//	lm_free_exit(data, &line);
 }
 
 int			main(int argc, char **argv)

@@ -6,7 +6,7 @@
 /*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 10:35:27 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/16 17:05:00 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/20 15:46:46 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,17 @@ void		lm_print_rooms(t_data *data)
 
 void	lm_print_path(t_path *path)
 {
+	t_links *links;
 	while (path != NULL)
 	{
 		ft_printf("room = %s\n", path->room->name);
+		links = path->room->links;
+		while (links)
+		{
+			ft_printf("\033[1;34mlinks = %s\033[0m\n", links->name);
+			ft_printf("\033[1;60mflux = %d\033[0m\n", links->flux);
+			links = links->next;
+		}
 		path = path->previous;
 	}
-	ft_printf("room = %p\n", path);
 }

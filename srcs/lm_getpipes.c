@@ -6,7 +6,7 @@
 /*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 13:20:16 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/16 17:39:23 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/20 14:01:39 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int		lm_get_pipe(t_data *data, char **line)
 	{
 		correct_line = ft_strsub(*line, 0, ft_strlen(*line) - 1);  // rendre portable en agisant sur la presence ou pas du \n
 		room_to_link = ft_strsplit(correct_line, '-');
+		free(correct_line);
 		if (room_to_link[0] && room_to_link[1])
 		{
 			room_0 = lm_room_exist(room_to_link[0], data);
@@ -71,6 +72,8 @@ int		lm_get_pipe(t_data *data, char **line)
 					exit(EXIT_FAILURE);
 				}
 			}
+			else
+				return (-1);
 		}
 		else
 		{
@@ -101,11 +104,14 @@ void	lm_pipe(t_data *data, char **line)
 			exit(EXIT_FAILURE);
 		}
 	}
+//	ft_printf("line : %s\nline add %p\n", *line, *line);
+	free(*line);
 	while (get_next_line(0, line) == 1)
 	{
 		if (!(*line[0] == '#'))
 			if (lm_get_pipe(data, line) == -1)
 				break;
+		free(*line);
 	}
 	free(*line);
 	lm_print_rooms(data);

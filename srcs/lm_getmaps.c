@@ -6,7 +6,7 @@
 /*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 16:06:53 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/16 17:15:53 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/20 14:03:18 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	**lm_check_room(t_data *data, char **line)
 	room = ft_strsplit(*line, ' ');
 	if (room[0] && room[1] && room[2] && !room[3])
 	{
-		if (ft_isanint(room[1]) && ft_isanint(room[2]))
+		if (room[0][0] != 'L' && ft_isanint(room[1]) && ft_isanint(room[2]))
 		{
 			hash = hachage(room[0], ft_strlen(room[0])); // Regarder qu'il n'y ai pas de '-'
 			if (data->hashtable[hash] != NULL)
@@ -61,12 +61,13 @@ char	**lm_check_room(t_data *data, char **line)
 		}
 		else
 		{
-			//free tout
-			ft_printf("ERROR\n");
-			exit(EXIT_FAILURE);
+			//free room
+			lm_free_str(room);
+			lm_free_exit(data, line);
 		}
 		return (room);
 	}
+	lm_free_str(room);
 //	free(room); // toutes passer par les differents;
 	return (NULL);
 }
@@ -94,7 +95,9 @@ int		lm_get_room(t_data *data, char **line)
 	else
 		new_room->next = current_room;
 	data->hashtable[hash] = new_room;
-	//free(room);
+	// necessaire ?
+	lm_free_str(room);
+	free(*line);
 	return (1);
 }
 
@@ -105,6 +108,7 @@ void	lm_getstart(t_data *data, char **line)
 	t_room	*current_room;
 	int		hash;
 
+	free(*line);
 	if (get_next_line(0, line) != 1)
 	{
 		//free
@@ -132,7 +136,9 @@ void	lm_getstart(t_data *data, char **line)
 		new_room->next = current_room;
 	data->hashtable[hash] = new_room;
 	data->start = new_room;
-	//free(room);
+	free(*line);
+	//necessaire ?
+	lm_free_str(room);
 }
 
 void	lm_getend(t_data *data, char **line)
@@ -142,6 +148,7 @@ void	lm_getend(t_data *data, char **line)
 	t_room	*current_room;
 	int		hash;
 
+	free(*line);
 	if (get_next_line(0, line) != 1)
 	{
 		//free
@@ -170,5 +177,7 @@ void	lm_getend(t_data *data, char **line)
 	data->hashtable[hash] = new_room;
 	data->end = new_room;
 	//free(room);
+	free(*line);
+	ft_strdel(room);
 }
 
