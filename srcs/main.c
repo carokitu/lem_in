@@ -6,7 +6,7 @@
 /*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:36:07 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/20 16:37:18 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/21 17:19:09 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,71 @@ static void		lm_room(t_data *data, char **line)
 	}
 }
 
+static void		lm_nb_path(t_data *data)
+{
+	int		i;
+	t_links	*link;
+
+	i = 0;
+	link = data->start->links;
+	while (link)
+	{
+		if (link->flux == 1)
+			i++;
+		link = link->next;
+	}
+	data->nb_path = i;
+	ft_printf("nb path = %d\n", data->nb_path);
+}
+
+
+static int		lm_path_lenght(t_room *current_room, t_data *data)
+{
+	int 		i;
+	t_links		*count_links;
+
+	i = 1;
+	while (current_room != data->end)
+	{	
+		count_links = current_room->links;
+		while (count_links && count_links->flux != 1)
+			count_links = count_links->next;
+		i++;
+		current_room = count_links->room;
+		count_links = current_room->links;
+	}
+	ft_printf("path lenght i = %d\n", i);
+	return (i);
+}
+
+static void		lm_total_path_lenght(t_data *data)
+{
+	int				i;
+	t_room			*current_room;
+	t_links			*current_link;
+	t_ants_infos	*starts;
+
+	i = 0;
+	if (!(data->challenger = (t_best *)ft_memalloc(sizeof(t_best))))
+	{
+		//free all
+		exit(EXIT_FAILURE)
+	}
+	current_room = data->start;
+	current_link = current_room->links;
+	while (current_link)
+	{
+		starts->room = current_link;
+		if (current_link->flux == 1)
+		{
+			current_room = current_link->room;
+			i += lm_path_lenght(current_room, data);
+		}
+		current_link = current_link->next;
+	}
+	ft_printf("ICI ON PEUT VOIR ? %d\n", i);
+}
+
 static void		lm_parsing(t_data *data)
 {
 	char	*line;
@@ -84,8 +149,15 @@ static void		lm_parsing(t_data *data)
 	lm_room(data, &line);
 	lm_pipe(data, &line);
 	ft_printf("*---------------------------*\n");
-	while ("pas de chemin possible")
-		lm_bfs_test(data);
+//	while ("pas de chemin possible")
+	while (lm_bfs(data) == 1)
+	{
+		lm_print_path(data->last);
+		lm_nb_path(data);
+		lm_total_path_lenght(data);
+	}
+	//lancer test_coups puis mettre dans best ou non
+	//lancer officiel des fourmis dans le best
 //	lm_free_exit(data, &line);
 }
 

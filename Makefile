@@ -6,7 +6,7 @@
 #    By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/18 13:45:49 by cde-moul          #+#    #+#              #
-#    Updated: 2020/01/20 11:11:06 by cde-moul         ###   ########.fr        #
+#    Updated: 2020/01/21 10:56:02 by cde-moul         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,15 +47,16 @@ $(OBJSDIR)/%.o	:	$(SRCSDIR)/%.c $(INCLUDES)
 					$(CC) -c $(CFLAGS) $(INCL) -c $< -o $@
 
 libft			:
-#   make -C srcs/libft/
 					@(cd $(SRCSLIB) && $(MAKE)) 
 
 
 clean			:
 					rm -rf $(OBJSDIR)
+					make -C $(SRCSLIB) clean
 
 fclean			:	clean
 					$(RM) $(EXEC)
+					make -C $(SRCSLIB) fclean
 
 re				:
 					make fclean

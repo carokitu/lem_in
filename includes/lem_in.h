@@ -6,7 +6,7 @@
 /*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:15:14 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/20 17:53:32 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/21 17:19:11 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,33 @@ typedef struct	s_path
 
 typedef struct	s_data
 {
-	struct s_room		*hashtable[8111];
-	int			ants;
-	int			order;
-	struct	s_room		*start;
-	struct	s_room		*end;
-	struct	s_path		*last;
-	struct	s_path		*best;
+	struct s_room			*hashtable[8111];
+	int						ants;
+	int						order;
+	int						nb_path;
+	struct	s_room			*start;
+	struct	s_room			*end;
+	struct	s_path			*last;
+	struct	s_best			*best;
+	struct	s_best			*challenger;
 	int			pass;
 	
 	// LINE
-}				t_data;
+}							t_data;
 
-
-typedef struct	s_best
+typedef struct	s_ants_info
 {
-	long		nb_coups;
-	struct s_path		*start;
-}				t_best;
+	t_room		*room;
+	t_room		*next_start;
+	t_room		*next;
+	int			moves;
+}				t_ants_info;
+
+typedef struct		s_best
+{
+	int				total_moves;
+	t_ants_info		*infos;
+}					t_best;
 
 /*
 ** LM_GETMAPS_C
@@ -81,8 +90,8 @@ int		lm_get_room(t_data *data, char **line);
 ** LM_BFS_S
 */
 
-int		lm_add_links(t_path **current_path, t_path **last, t_data *data);
-void	lm_bfs_test(t_data *data);
+int		lm_add_links(t_path *current_path, t_path **last, t_data *data);
+int		lm_bfs(t_data *data);
 
 /*
 ** LM_GETPIPES

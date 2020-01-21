@@ -6,7 +6,7 @@
 /*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 13:20:16 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/20 14:01:39 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/21 13:25:37 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,5 @@ void	lm_pipe(t_data *data, char **line)
 	}
 	free(*line);
 	lm_print_rooms(data);
-	lm_bfs_test(data);
+//	lm_bfs_test(data);
 }
