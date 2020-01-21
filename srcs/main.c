@@ -6,7 +6,7 @@
 /*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:36:07 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/21 17:19:09 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/21 17:28:14 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,12 @@ static void		lm_total_path_lenght(t_data *data)
 	t_room			*current_room;
 	t_links			*current_link;
 	t_ants_infos	*starts;
+	t_ants_infos	*next_start;
 
 	i = 0;
-	if (!(data->challenger = (t_best *)ft_memalloc(sizeof(t_best))))
+	if (!(data->challenger = (t_best *)ft_memalloc(sizeof(t_best))) 
+	|| !(starts = (t_ants_infos *)ft_memalloc(sizeof(t_ants_infos)))
+	|| !(next_start = (t_ants_infos *)ft_memalloc(sizeof(t_ants_infos))))
 	{
 		//free all
 		exit(EXIT_FAILURE)
@@ -129,13 +132,21 @@ static void		lm_total_path_lenght(t_data *data)
 	current_link = current_room->links;
 	while (current_link)
 	{
-		starts->room = current_link;
 		if (current_link->flux == 1)
 		{
 			current_room = current_link->room;
+			if (starts != NULL)
+				starts->room = current_link->name;
+			else
+			{
+				next_start->room = current_link->name;
+				next_start->next_start = starts;
+			}
+			// envoyer start
 			i += lm_path_lenght(current_room, data);
 		}
 		current_link = current_link->next;
+		
 	}
 	ft_printf("ICI ON PEUT VOIR ? %d\n", i);
 }
