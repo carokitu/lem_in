@@ -6,7 +6,7 @@
 /*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:36:07 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/22 17:36:25 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/22 19:11:59 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,8 @@ void			lm_total_moves(t_data *data)
 		moves = ((((float)data->ants + (float)data->challenger->total_moves) /
 				(float)data->challenger->nb_path)) - (float)ants_info->moves;
 		ants_info->nb_ants = (int)moves;
+		if (moves > (float)ants_info->nb_ants)
+			ants_info->nb_ants++;// FAIRE ATTENTION ON PEUT AVOIR TROP DE FOURMIS
 		if (ants_info->nb_ants + ants_info->moves - 1 > data->challenger->nb_steps)
 			data->challenger->nb_steps = ants_info->nb_ants + ants_info->moves - 1;
 		//ft_printf("ants_info->nb_ants = %d\n", (int)moves);
@@ -214,6 +216,7 @@ static void		lm_parsing(t_data *data)
 //		free(data->challenger);
 //		data->challenger = NULL;
 	}
+	lm_print_best(data->best);
 	lm_output(data);
 	//lm_print_best(data->best);
 }

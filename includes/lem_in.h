@@ -6,7 +6,7 @@
 /*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:15:14 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/22 17:34:59 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/22 18:43:04 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct s_room
 	struct s_room		*next;
 	struct s_room		*previous;
 	int			pass;
-	int					n_ants;
 }				t_room;
 
 typedef struct	s_path
@@ -51,7 +50,7 @@ typedef struct	s_data
 {
 	struct s_room			*hashtable[8111];
 	int						ants;
-	int						order;
+	int						ant_regis;;
 	int						nb_path;
 	struct	s_room			*start;
 	struct	s_room			*end;
@@ -70,6 +69,8 @@ typedef struct	s_ants_info
 	struct s_ants_info	*next;
 	int					moves;
 	int					nb_ants;
+	int					ants_in;
+	int					ants_out;
 }				t_ants_info;
 
 typedef struct		s_best
