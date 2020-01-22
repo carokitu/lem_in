@@ -6,7 +6,7 @@
 #    By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/18 13:45:49 by cde-moul          #+#    #+#              #
-#    Updated: 2020/01/21 10:56:02 by cde-moul         ###   ########.fr        #
+#    Updated: 2020/01/22 17:11:14 by cde-moul         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ SRCS			=	main.c \
 					lm_getpipes.c \
 					lm_bfs.c \
 					lm_free.c \
+					lm_compare.c \
+					lm_output.c \
 					lm_print_room.c
 
 OBJS			=	$(addprefix $(OBJSDIR)/, $(SRCS:.c=.o))

@@ -6,7 +6,7 @@
 /*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 10:35:27 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/21 11:01:37 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/22 12:13:15 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,32 @@ void	lm_print_path(t_path *path)
 		ft_printf("\n");
 		path = path->previous;
 	}
+}
+
+void		lm_print_best(t_best *best)
+{
+	t_ants_info *start;
+	t_ants_info *current;
+	int		i;
+
+	i = 0;
+	start = best->infos;
+	ft_printf("nombre de mouvements total :  %d\n", best->total_moves);
+	while (start)
+	{
+		ft_printf("CHEMIN NUMERO %d\n", i);
+		ft_printf("nombre de mouvements : %d\n", start->moves);
+		i++;
+		current = start;
+		while (current)
+		{
+			if (current->next != NULL)
+				ft_printf("%s --> ", current->room->name);
+			if (current->next == NULL)
+				ft_printf("%s\n", current->room->name);
+			current = current->next;
+		}
+		start = start->next_start;
+	}
+	ft_printf("\n");
 }
