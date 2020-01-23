@@ -6,17 +6,26 @@
 /*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 10:35:27 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/22 12:13:15 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/23 17:07:03 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void		lm_print_rooms(t_data *data)
+void			lm_print_links(t_links *links)
 {
-	int		i;
-	t_room	*current;
-	t_links	*links;
+	while (links != NULL)
+	{
+		ft_printf("\t%s\n", links->name);
+		links = links->next;
+	}
+}
+
+void			lm_print_rooms(t_data *data)
+{
+	int			i;
+	t_room		*current;
+	t_links		*links;
 
 	i = -1;
 	ft_printf("\n\n");
@@ -32,11 +41,7 @@ void		lm_print_rooms(t_data *data)
 				links = current->links;
 				if (links != NULL)
 					ft_printf("\033[1;34mlinks :\033[0m\n");
-				while (links != NULL)
-				{
-					ft_printf("\t%s\n", links->name);
-					links = links->next;
-				}
+				lm_print_links(links);
 				current = current->next;
 			}
 			ft_printf("\n");
@@ -44,9 +49,10 @@ void		lm_print_rooms(t_data *data)
 	}
 }
 
-void	lm_print_path(t_path *path)
+void			lm_print_path(t_path *path)
 {
-	t_links *links;
+	t_links		*links;
+
 	while (path != NULL)
 	{
 		ft_printf("room = %s\n", path->room->name);
@@ -62,11 +68,11 @@ void	lm_print_path(t_path *path)
 	}
 }
 
-void		lm_print_best(t_best *best)
+void			lm_print_best(t_best *best)
 {
-	t_ants_info *start;
-	t_ants_info *current;
-	int		i;
+	t_ants_info	*start;
+	t_ants_info	*current;
+	int			i;
 
 	i = 0;
 	start = best->infos;
