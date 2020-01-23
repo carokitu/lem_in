@@ -6,7 +6,7 @@
 /*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 13:20:16 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/22 17:14:51 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/23 11:10:07 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ int		lm_get_pipe(t_data *data, char **line)
 
 void	lm_pipe(t_data *data, char **line)
 {
+	char	*tmp;
+
 	if (*line == NULL)
 	{
 		//free
@@ -108,6 +110,9 @@ void	lm_pipe(t_data *data, char **line)
 	free(*line);
 	while (get_next_line(0, line) == 1)
 	{
+		tmp = data->line;
+		data->line = ft_strjoin(data->line, *line);
+		free(tmp);
 		if (!(*line[0] == '#'))
 			if (lm_get_pipe(data, line) == -1)
 				break;

@@ -6,7 +6,7 @@
 /*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 16:57:19 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/22 19:13:28 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/23 11:01:12 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	lm_output(t_data *data)
 {
 		t_ants_info		*current_start;
 
+		ft_printf("%s\n", data->line);
 		while (data->best->nb_steps != 0)
 		{
 				current_start = data->best->infos;

@@ -6,7 +6,7 @@
 /*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:15:14 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/22 18:43:04 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/23 10:51:42 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ typedef struct	s_data
 	struct	s_best			*best;
 	struct	s_best			*challenger;
 	int			pass;
-	
-	// LINE
+	char					*line;	
 }							t_data;
 
 typedef struct	s_ants_info

@@ -6,7 +6,7 @@
 /*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 16:06:53 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/20 14:03:18 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/23 11:02:55 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void	lm_getstart(t_data *data, char **line)
 	t_room	*new_room;
 	t_room	*current_room;
 	int		hash;
+	char	*tmp;
 
 	free(*line);
 	if (get_next_line(0, line) != 1)
@@ -115,6 +116,9 @@ void	lm_getstart(t_data *data, char **line)
 		ft_printf("ERROR\n");
 		exit(EXIT_FAILURE);
 	}
+	tmp = data->line;
+	data->line = ft_strjoin(data->line, *line);
+	free(tmp);
 	room = lm_check_room(data, line);
 	if (room == NULL)
 	{
@@ -147,11 +151,22 @@ void	lm_getend(t_data *data, char **line)
 	t_room	*new_room;
 	t_room	*current_room;
 	int		hash;
+	char	*tmp;
 
 	free(*line);
 	if (get_next_line(0, line) != 1)
 	{
 		//free
+		ft_printf("ERROR\n");
+		exit(EXIT_FAILURE);
+	}
+	tmp = data->line;
+	data->line = ft_strjoin(data->line, *line);
+	free(tmp);
+	room = lm_check_room(data, line);
+	if (room == NULL)
+	{
+		//free tout
 		ft_printf("ERROR\n");
 		exit(EXIT_FAILURE);
 	}
@@ -180,4 +195,3 @@ void	lm_getend(t_data *data, char **line)
 	free(*line);
 	ft_strdel(room);
 }
-

@@ -6,7 +6,7 @@
 /*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:36:07 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/22 19:11:59 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/23 11:02:01 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,18 @@
 
 static void		lm_nb_ants(t_data *data, char **line)
 {
+	char	*tmp;
+
 	while (get_next_line(0, line) == 1)
 	{
+		if (data->line == NULL)
+			data->line = ft_strdup(*line);
+		else
+		{
+			tmp = data->line;
+			data->line = ft_strjoin(data->line, *line);
+			free(tmp);
+		}	
 		if (!(*line[0] == '#' && (!(*line[1]) || (!(*line[1] != '#' )))))
 		{
 			if (ft_isanint(*line) == 1)
@@ -62,8 +72,13 @@ static void		lm_checkorders(t_data *data, char **line)
 
 static void		lm_room(t_data *data, char **line)
 {
+	char	*tmp;
+
 	while (get_next_line(0, line) == 1)
 	{
+		tmp = data->line;
+		data->line = ft_strjoin(data->line, *line);
+		free(tmp);
 		if (!(*line[0] == '#'))
 		{
 			if (lm_get_room(data, line) == -1)
