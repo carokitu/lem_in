@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lm_bfs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 14:56:20 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/23 17:14:34 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/27 08:29:37 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,7 @@ void		lm_edmonds_karp(t_data *data)
 static int	lm_real_bfs(t_data *data, t_path *current_path, t_path *last)
 {
 	if (!(current_path = (t_path *)ft_memalloc(sizeof(t_path))))
-	{
-		//free tout et exit
-		ft_printf("MALLOC_ERROR\n");
-		exit(EXIT_FAILURE);
-	}
+		lm_exit(data, "Malloc Error\n");
 	current_path->room = data->start;
 	data->start->pass = data->pass;
 	last = current_path;
@@ -79,7 +75,6 @@ static int	lm_real_bfs(t_data *data, t_path *current_path, t_path *last)
 		}
 		current_path = current_path->next;
 	}
-	ft_printf("\n");
 	return (0);
 }
 
@@ -97,10 +92,6 @@ int			lm_bfs(t_data *data)
 			return (1);
 	}
 	else
-	{
-		ft_printf("Error\n");
-// free all
-		exit(EXIT_SUCCESS);
-	}
+		lm_exit(data, "USAGE: You need an end and a start\n");
 	return (0);
 }

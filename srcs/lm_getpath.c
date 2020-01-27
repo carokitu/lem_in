@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lm_getpath.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 12:02:09 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/23 12:53:51 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/27 08:44:34 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void				lm_nb_path(t_data *data)
 		link = link->next;
 	}
 	data->challenger->nb_path = i;
-	ft_printf("nb path = %d\n", data->challenger->nb_path);
 }
 
 static int			lm_lenght_course(t_room *current_room,
@@ -45,8 +44,7 @@ static int			lm_lenght_course(t_room *current_room,
 		current_room = count_links->room;
 		count_links = current_room->links;
 		if (!(next = (t_ants_info *)ft_memalloc(sizeof(t_ants_info))))
-		//free tout
-			exit(EXIT_SUCCESS);
+			lm_exit(data, "Malloc Error\n");
 		next->room = current_room;
 		current->next = next;
 		current = current->next;
@@ -65,8 +63,10 @@ int					lm_path_lenght(t_room *current_room, t_data *data)
 	if (data->challenger)
 		start = data->challenger->infos;
 	else
-	//free tout
-		exit(EXIT_SUCCESS);
+	{
+		lm_exit(data, "dont get this error\n");
+		exit(EXIT_SUCCESS); //ca passe les flags "LOL" 
+	}
 	while (start->next_start)
 		start = start->next_start;
 	count_links = NULL;
@@ -83,18 +83,14 @@ static void			lm_get_challenger(t_data *data, t_room *current_room,
 	{
 		if ((!(data->challenger = (t_best *)ft_memalloc(sizeof(t_best))))
 		|| !(*current_start = (t_ants_info *)ft_memalloc(sizeof(t_ants_info))))
-		{
-		// free tout
-			exit(EXIT_SUCCESS);
-		}
+			lm_exit(data, "Malloc Error\n");
 		(*current_start)->room = current_room;
 		data->challenger->infos = *current_start;
 	}
 	else
 	{
 		if (!(next_start = (t_ants_info *)ft_memalloc(sizeof(t_ants_info))))
-		//free tout
-			exit(EXIT_FAILURE);
+			lm_exit(data, "Malloc Error\n");
 		next_start->room = current_room;
 		(*current_start)->next_start = next_start;
 		(*current_start) = (*current_start)->next_start;

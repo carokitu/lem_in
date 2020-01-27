@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:15:14 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/23 17:27:53 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/27 07:58:56 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ void					lm_compare(t_data *data);
 **	LM_FREE_C
 */
 
+void					lm_exit(t_data *data, char *print);
 void					lm_free_exit(t_data *data, char **line);
 void					lm_free_str(char **str);
 

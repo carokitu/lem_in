@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lm_getpipes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 13:20:16 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/23 16:57:24 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/27 07:48:41 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int				lm_make_links(t_data *data, char **room_to_link, char **line)
 			lm_link_room(room_1, room_0) == -1)
 		{
 			lm_free_exit(data, line);
-			//free room_to_link, data, line, ft_printf("malloc error");
+			lm_free_str(room_to_link);
+			//free tous les links; //ne pas continuer malloc error;
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -88,7 +89,7 @@ int				lm_get_pipe(t_data *data, char **line)
 		}
 		else
 		{
-			//, free room_to_link
+			lm_free_str(room_to_link);
 			return (-1);
 		}
 	}

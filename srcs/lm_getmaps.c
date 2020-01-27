@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lm_getmaps.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 16:06:53 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/23 16:38:10 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/27 01:12:31 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_room			*lm_fillroom(t_data *data, char **room, char **line, int hash)
 
 	if (!(new_room = (t_room *)ft_memalloc(sizeof(t_room))))
 	{
-		ft_strdel(room);
+		lm_free_str(room);
 		lm_free_exit(data, line);
 	}
 	new_room->name = ft_strdup(room[0]);

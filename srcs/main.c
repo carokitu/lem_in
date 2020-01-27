@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:36:07 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/23 16:13:05 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/27 08:30:34 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,7 @@ static void				lm_nb_ants(t_data *data, char **line)
 		}
 	}
 	if (data->ants <= 0)
-	{
-	// utiliser free_exit
-		ft_printf("ERROR_2\n");
-		free(line);
-		free(data);
-		exit(EXIT_FAILURE);
-	}
+		lm_free_exit(data, line);
 	free(*line);
 }
 
@@ -48,8 +42,10 @@ static void				lm_room(t_data *data, char **line)
 		if (!(*line[0] == '#'))
 		{
 			if (lm_get_room(data, line) == -1)
-			//	lm_free_exit(data, line);
-				return ;
+			{
+			//	free(*line);
+				return;
+			}
 		}
 		if ((*line)[0] == '#' && (*line)[1] && (*line)[1] == '#')
 		{
@@ -57,6 +53,8 @@ static void				lm_room(t_data *data, char **line)
 				lm_getstart(data, line);
 			else if (ft_strcmp(*line, "##end\n") == 0)
 				lm_getend(data, line);
+
+			//Si rien on free pas line autant toujours free line ici;
 		}
 	}
 }
@@ -91,6 +89,7 @@ static void				lm_parsing(t_data *data)
 	lm_nb_ants(data, &line);
 	lm_room(data, &line);
 	lm_pipe(data, &line);
+	// ca devrait pas etre dans la fonction de parsing
 	while (lm_bfs(data) == 1)
 	{
 		lm_total_path_lenght(data);
