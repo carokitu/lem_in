@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:28:10 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/27 08:27:53 by fgaribot         ###   ########.fr       */
+/*   Updated: 2020/01/27 17:18:35 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_links		*lm_flux_dependance(t_links *current_link, int a, int b)
 	return (link_save);
 }
 
-int			lm_flux_gestion(t_links *current_link, t_data *data, t_path **last,
+int			lm_flux_gestion(t_links *current_link, t_data *data,
 			t_path *current_path)
 {
 	int		flux;
@@ -71,11 +71,11 @@ int			lm_flux_gestion(t_links *current_link, t_data *data, t_path **last,
 			current_link = lm_flux_dependance(current_link, 0, -1);
 		current_link->room->pass = data->pass;
 		if (!(new_path = (t_path *)ft_memalloc(sizeof(t_path))))
-			lm_exit(data, "Malloc Error\n");
+			lm_print_exit(data, "Malloc Error\n");
 		new_path->room = current_link->room;
 		new_path->previous = current_path;
-		(*last)->next = new_path;
-		(*last) = new_path;
+		data->last->next = new_path;
+		data->last = new_path;
 	}
 	if (ft_strcmp(current_link->name, data->end->name) == 0 &&
 		current_link->flux != 1)

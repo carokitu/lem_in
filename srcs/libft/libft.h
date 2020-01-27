@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 18:17:52 by fgaribot          #+#    #+#             */
-/*   Updated: 2020/01/15 13:32:48 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/27 11:26:25 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef	struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-int     			ft_countnchar(char const *s, char c);
+int					ft_countnchar(char const *s, char c);
 int					ft_abs(int nb);
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);

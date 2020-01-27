@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 14:46:44 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/27 09:02:21 by fgaribot         ###   ########.fr       */
+/*   Updated: 2020/01/27 15:10:57 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ int				lm_get_room(t_data *data, char **line)
 	hash = hachage(room[0], ft_strlen(room[0]));
 	lm_fillroom(data, room, line, hash);
 	lm_free_str(room);
-	free(*line);
+//	free(*line);
 	return (1);
 }

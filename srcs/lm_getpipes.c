@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 13:20:16 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/27 09:01:22 by fgaribot         ###   ########.fr       */
+/*   Updated: 2020/01/27 15:10:56 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int				lm_link_room(t_room *room_0, t_room *room_1)
 
 	current_link = room_0->links;
 	while (current_link != NULL &&
-		ft_strcmp(current_link->name, room_1->name) != 0)
+		ft_strcmp(current_link->name, room_1->name) != 0 )
 		current_link = current_link->next;
 	if (current_link == NULL)
 	{
@@ -81,14 +81,12 @@ int				lm_get_pipe(t_data *data, char **line)
 		correct_line = ft_strsub(*line, 0, ft_strlen(*line) - 1);
 		room_to_link = ft_strsplit(correct_line, '-');
 		if (!(correct_line || room_to_link))
-			lm_free_exit(data, line);
+			lm_free_exit(data, line);	
 		free(correct_line);
-		if (room_to_link[0] && room_to_link[1])
-		{
-			if (lm_make_links(data, room_to_link, line) == -1)
-				return (-1);
-		}
-		else
+		if (room_to_link[0] && room_to_link[1]
+			&& lm_make_links(data, room_to_link, line) == -1)
+			return (-1);
+		else if (!(room_to_link[0] && room_to_link[1]))
 		{
 			lm_free_str(room_to_link);
 			return (-1);
@@ -104,15 +102,9 @@ void			lm_pipe(t_data *data, char **line)
 	char	*tmp;
 
 	if (*line == NULL)
-	{
-		//free je comprends pas comment ca peut arriver
-		exit(EXIT_FAILURE);
-	}
-	if (!(*line[0] == '#'))
-	{
-		if (lm_get_pipe(data, line) == -1)
+		lm_free_exit(data, line);
+	if (!(*line[0] == '#') && lm_get_pipe(data, line) == -1)
 			lm_free_exit(data, line);
-	}
 	free(*line);
 	while (get_next_line(0, line) == 1)
 	{

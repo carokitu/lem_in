@@ -6,7 +6,7 @@
 #    By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/18 13:45:49 by cde-moul          #+#    #+#              #
-#    Updated: 2020/01/23 16:33:33 by cde-moul         ###   ########.fr        #
+#    Updated: 2020/01/27 15:39:05 by cde-moul         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,16 +27,18 @@ SRCS			=	main.c \
 					lm_getroom.c \
 					lm_bfs.c \
 					lm_free.c \
+					lm_free_variations.c \
 					lm_compare.c \
 					lm_output.c \
 					lm_flux.c \
+					lm_algo.c \
 					lm_print_room.c
 
 OBJS			=	$(addprefix $(OBJSDIR)/, $(SRCS:.c=.o))
 
 CC				=	gcc -g
 
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror 
 
 INCL			=	-I includes/
 

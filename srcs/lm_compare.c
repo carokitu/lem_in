@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:14:37 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/27 08:49:08 by fgaribot         ###   ########.fr       */
+/*   Updated: 2020/01/27 16:01:20 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void			lm_get_line(t_data *data, char **line)
 	}
 }
 
-static void		lm_free_worst(t_best *data)
+void			lm_free_worst(t_best *data)
 {
 	t_ants_info *start;
 	t_ants_info *current;

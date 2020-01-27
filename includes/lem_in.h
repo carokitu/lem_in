@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:15:14 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/27 07:58:56 by fgaribot         ###   ########.fr       */
+/*   Updated: 2020/01/27 16:58:34 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,13 +102,15 @@ char					**lm_check_room(t_data *data, char **line);
 
 void					lm_getstart(t_data *data, char **line);
 void					lm_getend(t_data *data, char **line);
-t_room					*lm_fillroom(t_data *data, char **room, char **line, int hash);
+t_room					*lm_fillroom(t_data *data,
+						char **room, char **line, int hash);
 
 /*
 ** LM_BFS_C
 */
 
-int						lm_add_links(t_path *current_path, t_path **last, t_data *data);
+int						lm_add_links(t_path *current_path,
+						t_data *data);
 int						lm_bfs(t_data *data);
 void					lm_edmonds_karp(t_data *data);
 
@@ -117,8 +119,10 @@ void					lm_edmonds_karp(t_data *data);
 */
 
 int						lm_get_flux(t_path *current_path);
-t_links					*lm_flux_dependance(t_links *current_link, int a, int b);
-int						lm_flux_gestion(t_links *current_link, t_data *data, t_path **last,
+t_links					*lm_flux_dependance(t_links *current_link,
+						int a, int b);
+int						lm_flux_gestion(t_links *current_link,
+						t_data *data,
 						t_path *current_path);
 
 /*
@@ -140,7 +144,15 @@ void					lm_compare(t_data *data);
 **	LM_FREE_C
 */
 
-void					lm_exit(t_data *data, char *print);
+void					lm_exit(t_data *data);
+void					lm_free_path(t_path *last);
+void					lm_free_t_best(t_best *best);
+
+/*
+**	LM_FREE_VARIATIONS
+*/
+
+void					lm_print_exit(t_data *data, char *print);
 void					lm_free_exit(t_data *data, char **line);
 void					lm_free_str(char **str);
 
@@ -157,5 +169,17 @@ void					lm_print_best(t_best *best);
 */
 
 void					lm_output(t_data *data);
+
+/*
+** LM_ALGO_C
+*/
+
+void					lm_algo(t_data *data);
+
+/*
+** MAIN_C
+*/
+
+void					lm_total_moves(t_data *data);
 
 #endif

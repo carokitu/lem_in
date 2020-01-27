@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 16:06:53 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/27 08:51:34 by fgaribot         ###   ########.fr       */
+/*   Updated: 2020/01/27 17:04:22 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,19 @@ static char		**lm_getroom(t_data *data, char **line)
 
 	room = lm_check_room(data, line);
 	if (room == NULL)
+	{
+		lm_free_str(room);
 		lm_free_exit(data, line);
-	room = lm_check_room(data, line);
-	if (room == NULL)
-		lm_free_exit(data, line);
+	}
 	return (room);
 }
 
+/*
 static void		lm_free_str_line(char **room, char **line)
 {
 	lm_free_str(room);
 	free(*line);
-}
+}*/
 
 t_room			*lm_fillroom(t_data *data, char **room, char **line, int hash)
 {
@@ -72,7 +73,7 @@ void			lm_getend(t_data *data, char **line)
 	if (data->end != NULL)
 		lm_free_exit(data, line);
 	data->end = lm_fillroom(data, room, line, hash);
-	lm_free_str_line(room, line);
+	lm_free_str(room);
 }
 
 void			lm_getstart(t_data *data, char **line)
@@ -89,5 +90,5 @@ void			lm_getstart(t_data *data, char **line)
 	if (data->start != NULL)
 		lm_free_exit(data, line);
 	data->start = lm_fillroom(data, room, line, hash);
-	lm_free_str_line(room, line);
+	lm_free_str(room);
 }
