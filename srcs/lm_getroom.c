@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lm_getroom.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 14:46:44 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/23 15:06:39 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/27 09:02:21 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ char			**lm_check_room(t_data *data, char **line)
 {
 	char		**room;
 
-	room = ft_strsplit(*line, ' ');
+	if (!(room = ft_strsplit(*line, ' ')))
+		lm_free_exit(data, line);
 	if (room[0] && room[1] && room[2] && !room[3])
 	{
 		if (room[0][0] != 'L' && ft_isanint(room[1]) && ft_isanint(room[2]))

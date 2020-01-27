@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 13:20:16 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/27 07:48:41 by fgaribot         ###   ########.fr       */
+/*   Updated: 2020/01/27 09:01:22 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,13 @@ int				lm_make_links(t_data *data, char **room_to_link, char **line)
 		if (lm_link_room(room_0, room_1) == -1 ||
 			lm_link_room(room_1, room_0) == -1)
 		{
-			lm_free_exit(data, line);
 			lm_free_str(room_to_link);
-			//free tous les links; //ne pas continuer malloc error;
-			exit(EXIT_FAILURE);
+			lm_free_exit(data, line);
 		}
 	}
 	else
 		return (-1);
+	lm_free_str(room_to_link);
 	return (0);
 }
 
@@ -81,6 +80,8 @@ int				lm_get_pipe(t_data *data, char **line)
 	{
 		correct_line = ft_strsub(*line, 0, ft_strlen(*line) - 1);
 		room_to_link = ft_strsplit(correct_line, '-');
+		if (!(correct_line || room_to_link))
+			lm_free_exit(data, line);
 		free(correct_line);
 		if (room_to_link[0] && room_to_link[1])
 		{
@@ -104,7 +105,7 @@ void			lm_pipe(t_data *data, char **line)
 
 	if (*line == NULL)
 	{
-		//free
+		//free je comprends pas comment ca peut arriver
 		exit(EXIT_FAILURE);
 	}
 	if (!(*line[0] == '#'))
@@ -116,7 +117,11 @@ void			lm_pipe(t_data *data, char **line)
 	while (get_next_line(0, line) == 1)
 	{
 		tmp = data->line;
-		data->line = ft_strjoin(data->line, *line);
+		if (!(data->line = ft_strjoin(data->line, *line)))
+		{
+			free(tmp);
+			lm_free_exit(data, line);
+		}
 		free(tmp);
 		if (!(*line[0] == '#'))
 			if (lm_get_pipe(data, line) == -1)
