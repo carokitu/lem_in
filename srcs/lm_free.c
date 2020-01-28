@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 11:07:49 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/27 17:10:35 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/28 12:18:41 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static void		lm_free_rooms(t_room *current)
 
 	while (current)
 	{
-		ft_printf("je free la room : %s\n", current->name);
 		if (current->name)
 		{
 			free(current->name);
@@ -37,9 +36,11 @@ static void		lm_free_rooms(t_room *current)
 		}
 		to_free = current;
 		current = current->next;
+		free(to_free);
 	}
 }
 
+/* 
 void			lm_free_path(t_path *last)
 {
 	t_path		*current;
@@ -49,8 +50,36 @@ void			lm_free_path(t_path *last)
 	while (current->previous)
 	{
 		tmp = current;
+		if (tmp->next && tmp->next != tmp->previous)
+		{
+			ft_printf("ici on free -> %s\n", tmp->next->room->name);
+			free(tmp->next);
+		}
 		current = current->previous;
-		free(tmp);
+		if (current->next != tmp)
+		{
+			ft_printf("free de : %s\n", tmp->room->name);
+			free(tmp);
+		}
+	}
+	ft_printf("free de : %s\n", current->room->name);
+	free(current);
+}
+*/
+void		lm_free_path(t_path *last)
+{
+	t_path	*current;
+	t_path	*previous;
+
+	current = last;
+	while (current)
+	{
+		previous = current->previous;
+		if (current->next)
+			free(current->next);
+		if (previous == NULL || previous == NULL || previous->next != current)
+			free(current);
+		current = previous;
 	}
 }
 

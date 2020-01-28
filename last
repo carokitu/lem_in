@@ -1,0 +1,71 @@
+srcs/lm_algo.c:		if (data->last)
+srcs/lm_algo.c:			lm_free_path(data->last);
+srcs/lm_algo.c:			data->last = NULL;
+srcs/lm_bfs.c:	current_path = data->last;
+srcs/lm_bfs.c:	current_path->room = data->start;
+srcs/lm_bfs.c:	data->start->pass = data->pass;
+srcs/lm_bfs.c:	ft_printf("data->last : %p\n", data->last);
+srcs/lm_bfs.c:	data->last = current_path;
+srcs/lm_bfs.c:	data->pass += 1;
+srcs/lm_bfs.c:	if (data->start && data->end)
+srcs/lm_compare.c:	if (data->line == NULL)
+srcs/lm_compare.c:		if (!(data->line = ft_strdup(*line)))
+srcs/lm_compare.c:		tmp = data->line;
+srcs/lm_compare.c:		if (!(data->line = ft_strjoin(data->line, *line)))
+srcs/lm_compare.c:	start = data->infos;
+srcs/lm_compare.c:	if (data->best == NULL)
+srcs/lm_compare.c:		data->best = data->challenger;
+srcs/lm_compare.c:		if (data->best->nb_steps < data->challenger->nb_steps)
+srcs/lm_compare.c:			lm_free_worst(data->challenger);
+srcs/lm_compare.c:			lm_free_worst(data->best);
+srcs/lm_compare.c:			data->best = data->challenger;
+srcs/lm_compare.c:	data->challenger = NULL;
+srcs/lm_flux.c:	if (current_link->room->pass != data->pass && current_link->flux != 1)
+srcs/lm_flux.c:		current_link->room->pass = data->pass;
+srcs/lm_flux.c:		data->last->next = new_path;
+srcs/lm_flux.c:		data->last = new_path;
+srcs/lm_flux.c:	if (ft_strcmp(current_link->name, data->end->name) == 0 &&
+srcs/lm_free.c:	if (data->line)
+srcs/lm_free.c:		free(data->line);
+srcs/lm_free.c:	lm_free_path(data->last);
+srcs/lm_free.c:	lm_free_t_best(data->best);
+srcs/lm_free.c:		if (data->hashtable[i])
+srcs/lm_free.c:			lm_free_rooms(data->hashtable[i]);
+srcs/lm_getmaps.c:	current_room = data->hashtable[hash];
+srcs/lm_getmaps.c:	data->hashtable[hash] = new_room;
+srcs/lm_getmaps.c:	if (data->end != NULL)
+srcs/lm_getmaps.c:	data->end = lm_fillroom(data, room, line, hash);
+srcs/lm_getmaps.c:	if (data->start != NULL)
+srcs/lm_getmaps.c:	data->start = lm_fillroom(data, room, line, hash);
+srcs/lm_getpath.c:	link = data->start->links;
+srcs/lm_getpath.c:	data->challenger->nb_path = i;
+srcs/lm_getpath.c:	while (current_room != data->end)
+srcs/lm_getpath.c:	if (data->challenger)
+srcs/lm_getpath.c:		start = data->challenger->infos;
+srcs/lm_getpath.c:	if (data->challenger == NULL)
+srcs/lm_getpath.c:		if ((!(data->challenger = (t_best *)ft_memalloc(sizeof(t_best))))
+srcs/lm_getpath.c:		data->challenger->infos = *current_start;
+srcs/lm_getpath.c:	current_room = data->start;
+srcs/lm_getpath.c:	data->challenger->total_moves = i;
+srcs/lm_getpipes.c:	current_room = data->hashtable[hash];
+srcs/lm_getpipes.c:		tmp = data->line;
+srcs/lm_getpipes.c:		if (!(data->line = ft_strjoin(data->line, *line)))
+srcs/lm_getroom.c:	if (data->hashtable[hash] != NULL)
+srcs/lm_getroom.c:		name = data->hashtable[hash];
+srcs/lm_output.c:	if (start->nb_ants-- > 0 && data->ants != 0)
+srcs/lm_output.c:		data->ants--;
+srcs/lm_output.c:		data->ant_regis = data->ant_regis + 1;
+srcs/lm_output.c:		start->ants_in = data->ant_regis;
+srcs/lm_output.c:	if (data->best)
+srcs/lm_output.c:		ft_printf("%s\n", data->line);
+srcs/lm_output.c:		while (data->best->nb_steps != 0)
+srcs/lm_output.c:			current_start = data->best->infos;
+srcs/lm_output.c:			data->best->nb_steps--;
+srcs/lm_print_room.c:		current = data->hashtable[i];
+srcs/main.c:				data->ants = ft_atoi(*line);
+srcs/main.c:	if (data->ants <= 0)
+srcs/main.c:	ants_info = data->challenger->infos;
+srcs/main.c:		moves = ((((float)data->ants + (float)data->challenger->total_moves) /
+srcs/main.c:				(float)data->challenger->nb_path)) - (float)ants_info->moves;
+srcs/main.c:			> data->challenger->nb_steps)
+srcs/main.c:			data->challenger->nb_steps =
