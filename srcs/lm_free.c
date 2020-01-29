@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 11:07:49 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/28 12:18:41 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/29 11:20:56 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,14 +96,15 @@ void			lm_free_t_best(t_best *best)
 	while (current_start)
 	{
 		tmp_start = current_start;
-		current = current_start;
+		current = current_start->next;
 		while (current)
 		{
 			tmp = current;
 			current = current->next;
 			free(tmp);
 		}
-		current_start = tmp->next_start;
+		current_start = current_start->next_start;
+		free(tmp_start);
 	}
 	free(best);
 }

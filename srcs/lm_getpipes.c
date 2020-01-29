@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 13:20:16 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/27 15:10:56 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/29 10:41:06 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int				lm_make_links(t_data *data, char **room_to_link, char **line)
 	}
 	else
 		return (-1);
-	lm_free_str(room_to_link);
+//	lm_free_str(room_to_link);
 	return (0);
 }
 
@@ -94,6 +94,7 @@ int				lm_get_pipe(t_data *data, char **line)
 	}
 	else
 		return (-1);
+	lm_free_str(room_to_link);
 	return (0);
 }
 

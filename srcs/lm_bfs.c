@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 14:56:20 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/28 12:20:53 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/29 10:56:51 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static int		lm_real_bfs(t_data *data, t_path *current_path)
 	current_path->room = data->start;
 	data->start->pass = data->pass;
 	data->last = current_path;
+	ft_printf("j'alloue %s\n", data->last->room->name);
 	if (lm_add_links(current_path, data) == 1)
 	{
 		lm_edmonds_karp(data);

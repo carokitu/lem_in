@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:15:14 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/28 12:19:39 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/29 11:20:30 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct			s_path
 	struct s_room		*room;
 	struct s_path		*previous;
 	struct s_path		*next;
+	int					freed;
 }						t_path;
 
 typedef struct			s_data
