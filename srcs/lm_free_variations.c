@@ -6,13 +6,13 @@
 /*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:31:47 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/27 15:42:17 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/29 14:04:10 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void			lm_free_str(char **str)
+int				lm_free_str(char **str)
 {
 	int	i;
 
@@ -23,12 +23,13 @@ void			lm_free_str(char **str)
 			free(str[i]);
 	}
 	free(str);
+	return (0);
 }
 
 void			lm_print_exit(t_data *data, char *print)
 {
-	lm_exit(data);
 	ft_printf("%s", print);
+	lm_exit(data);
 }
 
 void			lm_free_exit(t_data *data, char **line)

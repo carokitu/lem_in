@@ -6,7 +6,7 @@
 /*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 16:57:19 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/29 11:28:52 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/29 15:38:00 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static void			lm_print_next(t_ants_info *start, int save, int *space)
 	current = start->next;
 	while (current)
 	{
-
 		save_next = current->ants_in;
 		current->ants_in = save;
 		save = save_next;

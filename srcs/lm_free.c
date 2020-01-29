@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 11:07:49 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/29 11:22:58 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/29 12:17:12 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,46 +40,19 @@ static void		lm_free_rooms(t_room *current)
 	}
 }
 
-/* 
 void			lm_free_path(t_path *last)
 {
-	t_path		*current;
-	t_path		*tmp;
+	t_path	*current;
+	t_path	*tmp;
 
 	current = last;
 	while (current->previous)
-	{
-		tmp = current;
-		if (tmp->next && tmp->next != tmp->previous)
-		{
-			ft_printf("ici on free -> %s\n", tmp->next->room->name);
-			free(tmp->next);
-		}
 		current = current->previous;
-		if (current->next != tmp)
-		{
-			ft_printf("free de : %s\n", tmp->room->name);
-			free(tmp);
-		}
-	}
-	ft_printf("free de : %s\n", current->room->name);
-	free(current);
-}
-*/
-void		lm_free_path(t_path *last)
-{
-	t_path	*current;
-	t_path	*previous;
-
-	current = last;
 	while (current)
 	{
-		previous = current->previous;
-		if (current->next)
-			free(current->next);
-		if (previous == NULL || previous == NULL || previous->next != current)
-			free(current);
-		current = previous;
+		tmp = current;
+		current = current->next;
+		free(tmp);
 	}
 }
 
@@ -116,8 +89,12 @@ void			lm_exit(t_data *data)
 	i = -1;
 	if (data->line)
 		free(data->line);
-	lm_free_path(data->last);
-	lm_free_t_best(data->best);
+	if (data->last)
+		lm_free_path(data->last);
+	if (data->best)
+		lm_free_t_best(data->best);
+	if (data->challenger)
+		lm_free_t_best(data->challenger);
 	while (++i < 8111)
 	{
 		if (data->hashtable[i])

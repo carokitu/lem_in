@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 14:56:20 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/29 10:56:51 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/29 15:35:09 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,10 @@ void			lm_edmonds_karp(t_data *data)
 static int		lm_real_bfs(t_data *data, t_path *current_path)
 {
 	if (!(current_path = (t_path *)ft_memalloc(sizeof(t_path))))
-		lm_print_exit(data, "Malloc Error\n");
+		lm_print_exit(data, "ERROR : Malloc\n");
 	current_path->room = data->start;
 	data->start->pass = data->pass;
 	data->last = current_path;
-	ft_printf("j'alloue %s\n", data->last->room->name);
 	if (lm_add_links(current_path, data) == 1)
 	{
 		lm_edmonds_karp(data);
@@ -74,7 +73,6 @@ static int		lm_real_bfs(t_data *data, t_path *current_path)
 		}
 		current_path = current_path->next;
 	}
-	//lm_free_path(current_path);
 	return (0);
 }
 
@@ -90,6 +88,6 @@ int				lm_bfs(t_data *data)
 			return (1);
 	}
 	else
-		lm_print_exit(data, "USAGE: You need an end and a start\n");
+		lm_print_exit(data, "ERROR: You need an end and a start\n");
 	return (0);
 }

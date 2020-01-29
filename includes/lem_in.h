@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:15:14 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/29 11:22:56 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/29 13:41:31 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct			s_path
 	struct s_room		*room;
 	struct s_path		*previous;
 	struct s_path		*next;
-//	int					freed;
 }						t_path;
 
 typedef struct			s_data
@@ -155,7 +154,7 @@ void					lm_free_t_best(t_best *best);
 
 void					lm_print_exit(t_data *data, char *print);
 void					lm_free_exit(t_data *data, char **line);
-void					lm_free_str(char **str);
+int						lm_free_str(char **str);
 
 /*
 **	LM_PRINT_ROOM_C

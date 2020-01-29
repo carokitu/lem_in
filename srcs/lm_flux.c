@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:28:10 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/29 10:51:31 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/29 12:04:05 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,8 @@ int			lm_flux_gestion(t_links *current_link, t_data *data,
 			current_link = lm_flux_dependance(current_link, 0, -1);
 		current_link->room->pass = data->pass;
 		if (!(new_path = (t_path *)ft_memalloc(sizeof(t_path))))
-			lm_print_exit(data, "Malloc Error\n");
+			lm_print_exit(data, "ERROR : Malloc\n");
 		new_path->room = current_link->room;
-		ft_printf("j'alloue %s\n", new_path->room->name);
 		new_path->previous = current_path;
 		data->last->next = new_path;
 		data->last = new_path;

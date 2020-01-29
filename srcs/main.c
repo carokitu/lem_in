@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:36:07 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/27 16:39:59 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/29 13:43:51 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,7 @@ static void				lm_room(t_data *data, char **line)
 		if (!(*line[0] == '#'))
 		{
 			if (lm_get_room(data, line) == -1)
-			{
-//				free(*line);
-				return;
-			}
+				return ;
 		}
 		if ((*line)[0] && (*line)[0] == '#' && (*line)[1] && (*line)[1] == '#')
 		{
@@ -53,9 +50,8 @@ static void				lm_room(t_data *data, char **line)
 				lm_getstart(data, line);
 			else if (ft_strcmp(*line, "##end\n") == 0)
 				lm_getend(data, line);
-			//Si rien on free pas line autant toujours free line ici;
 		}
-		free(*line); // check avec les erreurs
+		free(*line);
 	}
 }
 
@@ -86,17 +82,8 @@ static void				lm_parsing(t_data *data)
 
 	line = NULL;
 	lm_nb_ants(data, &line);
-	lm_room(data, &line);	
+	lm_room(data, &line);
 	lm_pipe(data, &line);
-/*
-	while (lm_bfs(data) == 1)
-	{
-		lm_total_path_lenght(data);
-		lm_nb_path(data);
-		lm_total_moves(data);
-		lm_compare(data);
-	}
-*/
 }
 
 int						main(int argc, char **argv)
@@ -106,8 +93,7 @@ int						main(int argc, char **argv)
 	argv = NULL;
 	if (argc != 1)
 	{
-// changer message erreur
-		ft_printf("ERROR_3\n");
+		ft_printf("ERROR\n");
 		return (1);
 	}
 	if (!(data = (t_data *)ft_memalloc(sizeof(t_data))))
