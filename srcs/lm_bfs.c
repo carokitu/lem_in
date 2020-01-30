@@ -15,14 +15,19 @@
 int				lm_add_links(t_path *current_path, t_data *data)
 {
 	t_links	*current_link;
+	int	gestion;
 
+	gestion = 0;
 	current_link = NULL;
 	if (current_path->room)
 		current_link = current_path->room->links;
 	while (current_link != NULL)
 	{
-		if (lm_flux_gestion(current_link, data, current_path) == 1)
+		gestion = lm_flux_gestion(current_link, data, current_path);
+		if (gestion == 1)
 			return (1);
+		else if (gestion == 2)
+			break;
 		current_link = current_link->next;
 	}
 	return (0);

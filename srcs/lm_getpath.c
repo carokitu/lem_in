@@ -84,6 +84,7 @@ static void			lm_get_challenger(t_data *data, t_room *current_room,
 			lm_print_exit(data, "ERROR : Malloc\n");
 		(*current_start)->room = current_room;
 		data->challenger->infos = *current_start;
+		data->challenger->pass = data->pass;
 	}
 	else
 	{

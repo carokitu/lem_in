@@ -78,6 +78,7 @@ typedef struct			s_best
 	int					nb_steps;
 	struct s_ants_info	*infos;
 	int					nb_path;
+	int					pass;//
 }						t_best;
 
 /*

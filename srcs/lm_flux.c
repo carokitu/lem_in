@@ -80,6 +80,8 @@ int			lm_flux_gestion(t_links *current_link, t_data *data,
 	if (ft_strcmp(current_link->name, data->end->name) == 0 &&
 		current_link->flux != 1)
 		return (1);
+	else if (current_link->flux == -1)
+		return (2);
 	current_link = current_link->next;
 	return (0);
 }

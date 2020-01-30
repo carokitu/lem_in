@@ -80,6 +80,7 @@ void			lm_print_best(t_best *best)
 	while (start)
 	{
 		ft_printf("CHEMIN NUMERO %d\n", i);
+		ft_printf("best->pass %d\n", best->pass);
 		ft_printf("nombre de mouvements : %d\n", start->moves);
 		i++;
 		current = start;
