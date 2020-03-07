@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 16:06:53 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/29 12:05:41 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/02/03 12:19:22 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,20 @@ void			lm_getend(t_data *data, char **line)
 	int		hash;
 
 	free(*line);
-	if (get_next_line(0, line) != 1)
+	while (get_next_line(0, line) == 1)
+	{
+		lm_get_line(data, line);
+		if ((*line)[0] == '#' && ((!((*line)[1])) ||
+			(((*line)[1]) && ((*line)[1] != '#'))))
+			free(*line);
+		else if (ft_strcmp(*line, "##start\n") == 0 ||
+				ft_strcmp(*line, "##end\n") == 0)
+			lm_free_exit(data, line);
+		else
+			break ;
+	}
+	if ((*line) == NULL)
 		lm_free_exit(data, line);
-	lm_get_line(data, line);
 	room = lm_getroom(data, line);
 	hash = hachage(room[0], ft_strlen(room[0]));
 	if (data->end != NULL)
@@ -75,9 +86,20 @@ void			lm_getstart(t_data *data, char **line)
 	int		hash;
 
 	free(*line);
-	if (get_next_line(0, line) != 1)
+	while (get_next_line(0, line) == 1)
+	{
+		lm_get_line(data, line);
+		if ((*line)[0] == '#' && ((!((*line)[1])) ||
+			(((*line)[1]) && ((*line)[1] != '#'))))
+			free(*line);
+		else if (ft_strcmp(*line, "##start\n") == 0 ||
+				ft_strcmp(*line, "##end\n") == 0)
+			lm_free_exit(data, line);
+		else
+			break ;
+	}
+	if ((*line) == NULL)
 		lm_free_exit(data, line);
-	lm_get_line(data, line);
 	room = lm_getroom(data, line);
 	hash = hachage(room[0], ft_strlen(room[0]));
 	if (data->start != NULL)

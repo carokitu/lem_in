@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 13:20:16 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/29 13:39:05 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/02/03 12:16:53 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,10 @@ int				lm_make_links(t_data *data, char **room_to_link, char **line)
 		}
 	}
 	else
+	{
+		lm_free_str(room_to_link);
 		return (-1);
+	}
 	return (0);
 }
 
@@ -103,7 +106,7 @@ void			lm_pipe(t_data *data, char **line)
 
 	if (*line == NULL)
 		lm_free_exit(data, line);
-	if (!(*line[0] == '#') && lm_get_pipe(data, line) == -1)
+	if (!((*line)[0] == '#') && lm_get_pipe(data, line) == -1)
 		lm_free_exit(data, line);
 	free(*line);
 	while (get_next_line(0, line) == 1)
@@ -115,7 +118,7 @@ void			lm_pipe(t_data *data, char **line)
 			lm_free_exit(data, line);
 		}
 		free(tmp);
-		if (!(*line[0] == '#'))
+		if (!((*line)[0] == '#'))
 			if (lm_get_pipe(data, line) == -1)
 				break ;
 		free(*line);

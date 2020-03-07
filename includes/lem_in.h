@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:15:14 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/29 13:41:31 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/31 11:58:16 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct			s_best
 	int					nb_steps;
 	struct s_ants_info	*infos;
 	int					nb_path;
-	int					pass;//
+	int					pass;
 }						t_best;
 
 /*

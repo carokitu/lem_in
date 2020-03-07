@@ -6,7 +6,7 @@
 /*   By: cde-moul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 16:57:19 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/29 15:38:00 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/01/31 12:05:59 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,5 @@ void				lm_output(t_data *data)
 		}
 	}
 	else
-		ft_printf("No path found\n");
+		ft_printf("ERROR\n");
 }

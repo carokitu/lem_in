@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 12:02:09 by cde-moul          #+#    #+#             */
-/*   Updated: 2020/01/29 12:10:09 by cde-moul         ###   ########.fr       */
+/*   Updated: 2020/02/03 11:40:11 by cde-moul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int			lm_lenght_course(t_room *current_room,
 		current_room = count_links->room;
 		count_links = current_room->links;
 		if (!(next = (t_ants_info *)ft_memalloc(sizeof(t_ants_info))))
-			lm_print_exit(data, "ERROR : Malloc\n");
+			lm_print_exit(data, "ERROR\n");
 		next->room = current_room;
 		current->next = next;
 		current = current->next;
@@ -81,7 +81,7 @@ static void			lm_get_challenger(t_data *data, t_room *current_room,
 	{
 		if ((!(data->challenger = (t_best *)ft_memalloc(sizeof(t_best))))
 		|| !(*current_start = (t_ants_info *)ft_memalloc(sizeof(t_ants_info))))
-			lm_print_exit(data, "ERROR : Malloc\n");
+			lm_print_exit(data, "ERROR\n");
 		(*current_start)->room = current_room;
 		data->challenger->infos = *current_start;
 		data->challenger->pass = data->pass;
@@ -89,7 +89,7 @@ static void			lm_get_challenger(t_data *data, t_room *current_room,
 	else
 	{
 		if (!(next_start = (t_ants_info *)ft_memalloc(sizeof(t_ants_info))))
-			lm_print_exit(data, "ERROR : Malloc\n");
+			lm_print_exit(data, "ERROR\n");
 		next_start->room = current_room;
 		(*current_start)->next_start = next_start;
 		(*current_start) = (*current_start)->next_start;
